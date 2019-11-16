@@ -28,7 +28,8 @@ export default {
     value: String,
     version: String,
     types: [String, Array],
-    addressFields: Object
+    addressFields: Object,
+    selectOnTab: true
   },
   data () {
     return {
@@ -90,7 +91,7 @@ export default {
 
       /* Store original event listener */
       const _addEventListener = input.addEventListener
-  
+
       const addEventListenerWrapper = (type, listener) => {
         if (type === "keydown") {
           /* Store existing listener function */
@@ -115,7 +116,7 @@ export default {
         }
         _addEventListener.apply(input, [type, listener])
       }
-  
+
       input.addEventListener = addEventListenerWrapper
     },
     setupInput () {
@@ -124,11 +125,11 @@ export default {
           this.hasDownBeenPressed = true;
         }
       })
-    
+
       this.enterPressListener = window.google.maps.event.addDomListener(this.element, 'keydown', (e) => {
         e.cancelBubble = true;
         // If enter key, or tab key
-        if (e.keyCode === 13 || e.keyCode === 9) {
+        if (e.keyCode === 13 || (this.selectOnTab && e.keyCode === 9)) {
           // If user isn't navigating using arrows and this hasn't ran yet
           if (!this.hasDownBeenPressed && !e.hasRanOnce) {
             let event = { keyCode: 40, hasRanOnce: true }
