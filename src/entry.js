@@ -26,5 +26,5 @@ if (GlobalVue) {
 }
 
 export { default as VueGooglePlaces } from './VueGooglePlaces';
-export { default as VuetifyGooglePlaces } from './VuetifyGooglePlaces';
+// export { default as VuetifyGooglePlaces } from './VuetifyGooglePlaces';
 export default plugin
